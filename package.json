@@ -1,0 +1,23 @@
+{
+  "name": "geekfactory-ic-js-util",
+  "version": "0.0.1",
+  "description": "IC JS util by GeekFactory",
+  "main": "./lib/es5/index.js",
+  "author": "GeekFactory <support@usergeek.com>",
+  "directories": {
+    "lib": "lib"
+  },
+  "homepage": "https://github.com/usergeek",
+  "keywords": [],
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "clean": "rm -rf lib",
+    "prebuild": "npm run clean",
+    "build": "tsc --project tsconfig.json"
+  },
+  "dependencies": {
+    "reuse-promise": "^2.0.0"
+  }
+}

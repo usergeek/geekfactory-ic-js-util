@@ -1,0 +1,10 @@
+import { Principal } from "@dfinity/principal";
+export declare const toHexString: (byteArray: Uint8Array | Array<number>) => string;
+export declare const principalToAccountIdentifier: (principal: string, s: Array<number> | number) => string;
+export declare const isAccountIdentifierValid: (accountIdentifier: string | undefined) => boolean;
+export declare const accountIdentifierToBytes: (accountIdentifier: string) => Uint8Array;
+export declare const isPrincipalValid: (principalText: string | undefined) => boolean;
+export declare const isCanisterPrincipal: (principal: Principal) => boolean;
+export declare const isSelfAuthenticatingPrincipal: (principal: Principal) => boolean;
+export declare const isSelfAuthenticatingPrincipalValid: (principalText: string | undefined) => boolean;
+export declare const isCanisterPrincipalValid: (principalText: string | undefined) => boolean;

@@ -1,6 +1,6 @@
 {
   "name": "geekfactory-ic-js-util",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "IC JS util by GeekFactory",
   "main": "./lib/es5/index.js",
   "author": "GeekFactory <support@usergeek.com>",

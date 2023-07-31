@@ -19,6 +19,7 @@ export const jsonStringify = (value: any, space?: string | number, options?: JSO
         if (principalAsText) {
             // Principal: add "__asText" property if value is a Principal
             if (typeof value === "object"
+                && value !== null
                 && value.hasOwnProperty("_isPrincipal") && value["_isPrincipal"] === true
                 && value.hasOwnProperty("_arr")
                 && typeof value["toText"] === "function"
@@ -51,6 +52,7 @@ export const jsonParse = (value: string, options?: JSONParseOptions) => {
         }
         if (parsePrincipal) {
             if (typeof value === "object"
+                && value !== null
                 && value.hasOwnProperty("_isPrincipal") && value["_isPrincipal"] === true
                 && value.hasOwnProperty("_arr")
             ) {

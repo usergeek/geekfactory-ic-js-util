@@ -1,21 +1,24 @@
 import {Principal} from "@dfinity/principal";
 
+type NeuronIdAsTextTransform = (key: any, value: any) => {key: string, value: any} | undefined
 export type JSONStringifyOptions = {
     principalAsText?: boolean
+    neuronIdAsText?: NeuronIdAsTextTransform
 }
 /**
  * Stringify a JSON object with BigInt and IC types support
  * @param value Value to stringify
  * @param space Space to use for indentation
- * @param options JSONStringifyOptions options. Default: {principalAsText: false}
+ * @param options JSONStringifyOptions options. Default: {principalAsText: false, neuronIdAsText: undefined}
  */
 export const jsonStringify = (value: any, space?: string | number, options?: JSONStringifyOptions) => {
-    const {principalAsText = false} = options || {}
+    const {principalAsText = false, neuronIdAsText = undefined} = options || {}
     return JSON.stringify(value, (key, value) => {
         if (typeof value === "bigint") {
             return `${value.toString()}n`
         }
 
+        //principalAsText
         if (principalAsText) {
             // Principal: add "__asText" property if value is a Principal
             if (typeof value === "object"
@@ -28,6 +31,18 @@ export const jsonStringify = (value: any, space?: string | number, options?: JSO
                     value["__asText"] = value["toText"]()
                 } catch (e) {
                 }
+            }
+        }
+
+        //neuronIdAsText
+        if (typeof neuronIdAsText === "function") {
+            try {
+                const neuronIdAsTextTransform: NeuronIdAsTextTransform = neuronIdAsText
+                const result = neuronIdAsTextTransform(key, value)
+                if (result != undefined) {
+                    value[result.key] = result.value
+                }
+            } catch (e) {
             }
         }
 
